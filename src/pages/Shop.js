@@ -225,7 +225,22 @@ const Shop = () => {
                   <FaShoppingCart className="mr-1" /> Add to Cart
                 </button>
               )}
-              <button className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md">Buy Now</button>
+              <button 
+                onClick={() => navigate('/checkout', { 
+                  state: { 
+                    cartItems: [{
+                      productId: product._id,
+                      name: product.name,
+                      price: product.price,
+                      quantity: 1,
+                      image: product.image
+                    }] 
+                  } 
+                })} 
+                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md"
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         ))}
