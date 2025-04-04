@@ -893,7 +893,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build", 
+    "build": "react-scripts build && mv build dist",
     "test": "react-scripts test"
   },
   "keywords": [],
