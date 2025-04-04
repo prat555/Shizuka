@@ -1,7 +1,6 @@
 # Shizuka - Sustainable E-Commerce Platform
 
-![Shizuka Logo](https://cdn.iconscout.com/icon/free/png-256/free-react-logo-icon-download-in-svg-png-gif-file-formats--company-brand-world-logos-vol-4-pack-icons-282599.png?f=webp&w=256) 
-*Eco-friendly shopping made simple*
+![Shizuka Logo](https://static.vecteezy.com/system/resources/thumbnails/009/157/893/small/shopping-cart-set-of-shopping-cart-icon-on-white-background-shopping-cart-icon-shopping-cart-design-shopping-cart-icon-sign-shopping-cart-icon-isolated-shopping-cart-symbol-free-vector.jpg) 
 
 ## 🌱 Introduction
 
@@ -52,13 +51,14 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 3. Category navigation tiles
 4. Location-aware delivery messaging
 
-### **Navigation Bar**
-![Navbar](https://via.placeholder.com/600x100?text=Shizuka+Navbar)  
-*Includes:*
-- Location pin with auto-detection 🌍
-- Search bar with suggestions 🔍
-- Quick-access icons for all pages
-
+### **Shop Page**
+![Shop Page](https://i.imgur.com/9jzCtiC.png)  
+*Featuring:*
+1. Product Catalog – Browse a wide range of products.
+2. Shopping Cart – Easily add items to your cart for purchase.
+3. Wishlist – Save favorite products for later.
+4. Quick Purchase – Instant "Buy Now" option for fast checkout.
+5. Detailed Product Info – Includes descriptions, customer ratings, and pricing.
 
 ### Installation
 
@@ -76,20 +76,19 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 3. **Set up environment variables**
    Create a `.env` file in the root directory with the following variables:
    ```
-   REACT_APP_API_BASE_URL=your-backend-api-url
    MONGO_URI=your-mongodb-connection-string
    PORT=5000
    ```
+   
+4. **Run the development server**
+   ```bash
+   npm start
+   ```
 
-4. **For backend setup**
+5. **For backend setup**
    ```bash
    cd backend
    node server.js
-   ```
-
-5. **Run the development server**
-   ```bash
-   npm start
    ```
 
 ## 📂 Project Structure
@@ -129,24 +128,6 @@ The application is live at:
 | `/api/cart` | GET/POST | Cart operations |
 | `/api/orders` | POST | Create new order |
 
-## 📸 Screenshots
-
-![Home Page](https://via.placeholder.com/600x400?text=Shizuka+Home+Page)  
-*Home page showcasing featured sustainable products*
-
-![Product Page](https://via.placeholder.com/600x400?text=Product+Page)  
-*Detailed product view with eco-friendly attributes*
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📧 Contact using mail
 
 [Pratyush Goutam](mailto:pratg5935@gmail.com)  
@@ -154,7 +135,7 @@ Contributions are welcome! Please follow these steps:
 
 ## 🙏 Acknowledgments
 
-- Inspiration from sustainable brands
+- Inspiration from UN SDG 11, 15
 - React and Tailwind CSS communities
 - MongoDB for their excellent documentation
 - Render and Vercel for free hosting tiers
