@@ -45,7 +45,7 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 ## 📸 Screenshots
 
 ### **Home Page**
-![Home Page](https://via.placeholder.com/600x400?text=Shizuka+Home+Page)  
+![Home Page](https://i.imgur.com/HjwOImj.png)  
 *Featuring:*
 1. Special offers banner
 2. Featured products carousel
