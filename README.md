@@ -1,7 +1,6 @@
 # Shizuka - Sustainable E-Commerce Platform
 
-![Shizuka Logo](https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg){: width="200" height="200" }
-<img src="https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg" alt="Shizuka Logo" width="200" height="200" />
+<img src="https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg" alt="Shizuka Logo" width="300" height="300" />
 
 ## 🌱 Introduction
 
