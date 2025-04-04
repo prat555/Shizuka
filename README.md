@@ -130,8 +130,8 @@ The application is live at:
 
 ## 📧 Contact us
 
-[Pratyush Goutam](mailto:pratg5935@gmail.com)  
-[Cherry Sharma](mailto:5nov.pratyushg@gmail.com)
+[Pratyush Goutam](mailto:pratg5935@gmail.com)  - Full Stack Developer
+[Cherry Sharma](mailto:5nov.pratyushg@gmail.com) - UX/UI Designer & Frontend Specialist
 
 ## 🙏 Acknowledgments
 
