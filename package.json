@@ -44,7 +44,7 @@
     "async-function": "^1.0.0",
     "asynckit": "^0.4.0",
     "at-least-node": "^1.0.0",
-    "autoprefixer": "^9.8.8",
+    "autoprefixer": "^10.4.21",
     "available-typed-arrays": "^1.0.7",
     "axe-core": "^4.10.2",
     "axios": "^1.8.4",
@@ -893,6 +893,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "react-scripts build",
     "start": "react-scripts start"
   },
   "keywords": [],
