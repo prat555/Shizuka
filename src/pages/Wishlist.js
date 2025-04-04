@@ -22,13 +22,13 @@ const Wishlist = () => {
       setError(null);
       try {
         const apiUrl = category
-          ? `http://localhost:5000/products?category=${encodeURIComponent(category)}`
-          : "http://localhost:5000/products";
+          ? `https://shizuka-backend.onrender.com/products?category=${encodeURIComponent(category)}`
+          : "https://shizuka-backend.onrender.com/products";
 
         const [productsRes, wishlistRes, cartRes] = await Promise.all([
           fetch(apiUrl),
-          fetch(`http://localhost:5000/wishlist/${userId}`),
-          fetch(`http://localhost:5000/cart/${userId}`)
+          fetch(`https://shizuka-backend.onrender.com/wishlist/${userId}`),
+          fetch(`https://shizuka-backend.onrender.com/cart/${userId}`)
         ]);
 
         if (!productsRes.ok) throw new Error("Failed to fetch products.");
@@ -67,7 +67,7 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (product) => {
     try {
-      const response = await fetch("http://localhost:5000/wishlist/remove", {
+      const response = await fetch("https://shizuka-backend.onrender.com/wishlist/remove", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -99,11 +99,11 @@ const Wishlist = () => {
       
       if (quantity > (cart[product._id] || 0)) {
         // Increasing quantity - use add endpoint
-        url = "http://localhost:5000/cart/add";
+        url = "https://shizuka-backend.onrender.com/cart/add";
         method = "POST";
       } else {
         // Decreasing quantity or removing - use update endpoint
-        url = "http://localhost:5000/cart/update";
+        url = "https://shizuka-backend.onrender.com/cart/update";
         method = "POST";
       }
   
