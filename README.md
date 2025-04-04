@@ -1,6 +1,6 @@
 # Shizuka - Sustainable E-Commerce Platform
 
-![Shizuka Logo]([https://via.placeholder.com/150x50?text=Shizuka](https://png.pngtree.com/element_our/20190531/ourmid/pngtree-shopping-cart-convenient-icon-image_1287807.jpg))  
+![Shizuka Logo](https://png.pngtree.com/element_our/20190531/ourmid/pngtree-shopping-cart-convenient-icon-image_1287807.jpg) 
 *Eco-friendly shopping made simple*
 
 ## 🌱 Introduction
