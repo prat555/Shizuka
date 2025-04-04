@@ -893,7 +893,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build ../build",
     "start": "react-scripts start"
   },
   "keywords": [],
