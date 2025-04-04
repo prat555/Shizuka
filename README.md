@@ -17,6 +17,9 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - **User Authentication**: Secure account management
 
 
+
+
+
 ## 🛠️ Technologies Used
 
 ### Frontend
