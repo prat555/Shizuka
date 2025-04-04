@@ -893,7 +893,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "react-scripts build && mv build ../build",
+    "build": "react-scripts build",
+    "serve": "serve -s build", 
     "start": "react-scripts start"
   },
   "keywords": [],
@@ -912,6 +913,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "serve": "^14.2.4"
   }
 }
