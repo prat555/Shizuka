@@ -147,10 +147,10 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📧 Contact
+## 📧 Contact using mail
 
-Your Name - [Pratyush Goutam (gmail)](mailto:pratg5035@gmail.com)  
-Project Link: [https://github.com/your-username/shizuka](https://github.com/your-username/shizuka)
+[Pratyush Goutam](mailto:pratg5935@gmail.com)  
+[Cherry Sharma](mailto:5nov.pratyushg@gmail.com)
 
 ## 🙏 Acknowledgments
 
