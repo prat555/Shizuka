@@ -113,7 +113,7 @@ shizuka/
 ## 🌐 Live Demo
 
 The application is live at:  
-[Frontend](https://shizuka-nine.vercel.app)  
+[Shizuka](https://shizuka-nine.vercel.app)  
 [Backend API](https://shizuka-backend.onrender.com)
 
 ## 📝 API Endpoints
