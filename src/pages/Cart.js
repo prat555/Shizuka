@@ -15,7 +15,7 @@ const Cart = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:5000/cart/${userId}`);
+        const response = await fetch(`https://shizuka-backend.onrender.com/cart/${userId}`);
         if (!response.ok) throw new Error("Failed to fetch cart items.");
         
         const data = await response.json();
@@ -35,7 +35,7 @@ const Cart = () => {
     if (newQuantity < 1) return;
     
     try {
-      const response = await fetch("http://localhost:5000/cart/update", {
+      const response = await fetch("https://shizuka-backend.onrender.com/cart/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -59,7 +59,7 @@ const Cart = () => {
 
   const removeItem = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:5000/cart/remove/${productId}`, {
+      const response = await fetch(`https://shizuka-backend.onrender.com/cart/remove/${productId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId })
