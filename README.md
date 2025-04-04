@@ -1,6 +1,6 @@
 # Shizuka - Sustainable E-Commerce Platform
 
-![Shizuka Logo](https://static.vecteezy.com/system/resources/thumbnails/009/157/893/small/shopping-cart-set-of-shopping-cart-icon-on-white-background-shopping-cart-icon-shopping-cart-design-shopping-cart-icon-sign-shopping-cart-icon-isolated-shopping-cart-symbol-free-vector.jpg) 
+![Shizuka Logo](https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg) 
 
 ## 🌱 Introduction
 
