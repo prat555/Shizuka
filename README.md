@@ -128,7 +128,7 @@ The application is live at:
 | `/api/cart` | GET/POST | Cart operations |
 | `/api/orders` | POST | Create new order |
 
-## 📧 Contact using mail
+## 📧 Contact us
 
 [Pratyush Goutam](mailto:pratg5935@gmail.com)  
 [Cherry Sharma](mailto:5nov.pratyushg@gmail.com)
