@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/shop/:path*", "destination": "/shop" },
+    { "source": "/shop", "destination": "/shop" },
     { "source": "/:path*", "destination": "/" }
   ]
 }
