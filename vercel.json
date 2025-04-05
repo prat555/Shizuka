@@ -1,15 +1,7 @@
+// vercel.json
 {
-  "routes": [
-    {
-      "src": "/shop(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "Cache-Control": "no-cache"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+  "rewrites": [
+    { "source": "/shop/:path*", "destination": "/shop" },
+    { "source": "/:path*", "destination": "/" }
   ]
 }
