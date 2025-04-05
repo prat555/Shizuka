@@ -1,4 +1,3 @@
-// vercel.json
 {
   "rewrites": [
     { "source": "/shop/:path*", "destination": "/shop" },
