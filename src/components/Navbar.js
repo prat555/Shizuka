@@ -202,7 +202,7 @@ const Navbar = () => {
             {mobileMenuOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
           </button>
           <Link to="/" className="text-gray-300 font-extrabold text-xl tracking-wide hover:text-white transition duration-300">
-            Nyra
+            Shizuka
           </Link>
         </div>
 
