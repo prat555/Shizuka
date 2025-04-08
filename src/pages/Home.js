@@ -70,7 +70,7 @@ const Home = () => {
           </div>
         </div>
         <div className="relative">
-          <img src="/images/offer3.png" alt="Offer 3" className="h-60 w-full object-cover rounded-lg shadow-lg" />
+          <img src="/images/3.png" alt="Offer 3" className="h-60 w-full object-cover rounded-lg shadow-lg" />
           <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center text-white">
             <h3 className="text-xl font-bold">Eco-Friendly Gadgets for a Green Future</h3>
             <Link to="/shop" className="mt-2 bg-green-500 px-4 py-2 rounded hover:bg-green-600">Explore Now</Link>
