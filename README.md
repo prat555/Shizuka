@@ -52,7 +52,7 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 4. Location-aware delivery messaging
 
 ### **Shop Page**
-![Shop Page](https://i.imgur.com/9jzCtiC.png)  
+![Shop Page](https://i.postimg.cc/sfwb3HfF/Screenshot-2025-05-01-092346.png) 
 *Featuring:*
 1. Product Catalog – Browse a wide range of products.
 2. Shopping Cart – Easily add items to your cart for purchase.
