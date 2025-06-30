@@ -1,4 +1,4 @@
-# Shizuka - Sustainable E-Commerce Platfor
+# Shizuka - Sustainable E-Commerce Platform
 
 <img src="https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg" alt="Shizuka Logo" width="300" height="300" />
 
@@ -130,7 +130,7 @@ The application is live at:
 
 ## 🙏 Acknowledgments
 
-- Inspiration from UN SDG 11, 15
+- Inspiration from UN SDG 12, 15
 - React and Tailwind CSS communities
 - MongoDB for their excellent documentation
 - Render and Vercel for free hosting tiers
