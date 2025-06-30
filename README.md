@@ -33,6 +33,25 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - Node.js (v16+)
 - npm or yarn
 
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/shizuka.git
+   cd shizuka
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm start
+   ```
+
+
 ## 📸 Screenshots
 
 ### **Home Page**
@@ -51,24 +70,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 3. Wishlist – Save favorite products for later.
 4. Quick Purchase – Instant "Buy Now" option for fast checkout.
 5. Detailed Product Info – Includes descriptions, customer ratings, and pricing.
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/shizuka.git
-   cd shizuka
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm start
-   ```
 
 ## 📂 Project Structure
 
