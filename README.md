@@ -27,31 +27,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - **Vercel** for frontend hosting
 - **Render** for backend hosting
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v16+)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/prat555/Shizuka.git
-   cd Shizuka
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm start
-   ```
-
-
 ## 📸 Screenshots
 
 ### **Home Page**
@@ -89,22 +64,6 @@ shizuka/
 ├── package.json          # Frontend dependencies
 └── README.md             # Project documentation
 ```
-
-## 🌐 Live Demo
-
-The application is live at:  
-Frontend(Production): [https://shizuka-san.vercel.app](https://shizuka-san.vercel.app)  
-Backend API:[https://shizuka-backend.onrender.com](https://shizuka-backend.onrender.com)
-
-## 📝 API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/products` | GET | Get all products |
-| `/api/products/:id` | GET | Get single product |
-| `/api/wishlist` | GET/POST | Wishlist operations |
-| `/api/cart` | GET/POST | Cart operations |
-| `/api/orders` | POST | Create new order |
 
 ## 🙏 Acknowledgments
 
