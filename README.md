@@ -128,12 +128,6 @@ The application is live at:
 | `/api/cart` | GET/POST | Cart operations |
 | `/api/orders` | POST | Create new order |
 
-## 📧 Contact us
-
-[Pratyush Goutam](mailto:pratg5935@gmail.com)  - Full Stack Developer
-
-[Cherry Sharma](mailto:5nov.pratyushg@gmail.com) - UX/UI Designer & Frontend Specialist
-
 ## 🙏 Acknowledgments
 
 - Inspiration from UN SDG 11, 15
