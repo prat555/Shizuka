@@ -130,7 +130,7 @@ The application is live at:
 
 ## 🙏 Acknowledgments
 
-- Inspiration from UN SDG 11, 15
+- Inspiration from UN SDG 12, 15
 - React and Tailwind CSS communities
 - MongoDB for their excellent documentation
 - Render and Vercel for free hosting tiers
