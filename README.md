@@ -85,7 +85,7 @@ shizuka/
 │   ├── models/           # MongoDB models
 │   ├── routes/           # API routes
 │   └── server.js         # Server entry point
-├── .env.example          # Environment variables template
+├── .env                  # Environment variables template
 ├── package.json          # Frontend dependencies
 └── README.md             # Project documentation
 ```
