@@ -11,9 +11,7 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - **Product Catalog**: Browse sustainable products across various categories
 - **Shopping Cart**: Add/remove items and adjust quantities
 - **Wishlist**: Save favorite products for later
-- **Secure Checkout**: Complete purchases with confidence
 - **Responsive Design**: Works perfectly on all devices
-- **User Authentication**: Secure account management
 
 ## 🛠️ Technologies Used
 
@@ -28,7 +26,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - **Node.js** with **Express.js**
 - **MongoDB** for database
 - **Mongoose** for ODM
-- **JWT** for authentication
 
 ### Deployment
 - **Vercel** for frontend hosting
@@ -39,7 +36,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 ### Prerequisites
 - Node.js (v16+)
 - npm or yarn
-- MongoDB Atlas account or local MongoDB instance
 
 ## 📸 Screenshots
 
@@ -109,8 +105,6 @@ The application is live at:
 |----------|--------|-------------|
 | `/api/products` | GET | Get all products |
 | `/api/products/:id` | GET | Get single product |
-| `/api/auth/register` | POST | Register new user |
-| `/api/auth/login` | POST | User login |
 | `/api/wishlist` | GET/POST | Wishlist operations |
 | `/api/cart` | GET/POST | Cart operations |
 | `/api/orders` | POST | Create new order |
