@@ -1,4 +1,4 @@
-# 🌱 Shizuka - Sustainable E-Commerce Platform
+# Shizuka - Sustainable E-Commerce Platform
 
 Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly products. Built with modern web technologies, Shizuka offers a seamless shopping experience for environmentally conscious consumers.
 
