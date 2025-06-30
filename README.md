@@ -37,7 +37,7 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/shizuka.git
+   git clone https://github.com/prat555/shizuka.git
    cd shizuka
    ```
 
