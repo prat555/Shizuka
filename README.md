@@ -1,8 +1,4 @@
-# Shizuka - Sustainable E-Commerce Platform
-
-<img src="https://static.vecteezy.com/system/resources/previews/000/554/815/non_2x/shopping-cart-vector-icon.jpg" alt="Shizuka Logo" width="300" height="300" />
-
-## 🌱 Introduction
+# 🌱 Shizuka - Sustainable E-Commerce Platform
 
 Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly products. Built with modern web technologies, Shizuka offers a seamless shopping experience for environmentally conscious consumers.
 
