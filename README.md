@@ -73,22 +73,9 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
    npm install
    ```
 
-3. **Set up environment variables**
-   Create a `.env` file in the root directory with the following variables:
-   ```
-   MONGO_URI=your-mongodb-connection-string
-   PORT=5000
-   ```
-   
-4. **Run the development server**
+3. **Run the development server**
    ```bash
    npm start
-   ```
-
-5. **For backend setup**
-   ```bash
-   cd backend
-   node server.js
    ```
 
 ## 📂 Project Structure
