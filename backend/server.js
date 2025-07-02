@@ -17,13 +17,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString() 
-  });
-});
-
 // Connect to Database
 
 connectDB()
