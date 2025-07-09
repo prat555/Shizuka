@@ -1,5 +1,3 @@
-
-
 # Shizuka - Sustainable E-Commerce Platform
 
 Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly products. Built with modern web technologies, Shizuka offers a seamless shopping experience for environmentally conscious consumers with comprehensive authentication and user management features.
@@ -215,16 +213,6 @@ shizuka/
 - **Touch-Friendly**: Intuitive touch interactions
 - **Cross-Browser**: Compatible with modern web browsers
 
-## 🤝 Contributing
-
-We welcome contributions to Shizuka! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -238,14 +226,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **MongoDB** for database solutions and documentation
 - **Vercel & Render** for providing excellent hosting platforms
 - **Open Source Community** for the amazing tools and libraries
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Issues](https://github.com/yourusername/shizuka/issues) page
-2. Create a new issue with detailed information
-3. Contact the development team
 
 ---
 
