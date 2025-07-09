@@ -2,7 +2,7 @@
 
 Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly products. Built with modern web technologies, Shizuka offers a seamless shopping experience for environmentally conscious consumers with comprehensive authentication and user management features.
 
-## 🌟 Key Features Explained
+## ✨ Key Features Explained
 
 ### Authentication Flow
 - **Registration**: Users can create accounts with email/password or Google OAuth
