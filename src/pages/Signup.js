@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
@@ -15,11 +15,36 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Load saved form data on component mount
+  useEffect(() => {
+    const savedFormData = localStorage.getItem('shizuka_signup_data');
+    if (savedFormData) {
+      try {
+        const parsed = JSON.parse(savedFormData);
+        setFormData(prev => ({
+          ...prev,
+          ...parsed
+        }));
+      } catch (err) {
+        console.error('Error parsing saved form data:', err);
+      }
+    }
+  }, []);
+
   const handleChange = (e) => {
-    setFormData({
+    const { name, value } = e.target;
+    const newFormData = {
       ...formData,
-      [e.target.name]: e.target.value
-    });
+      [name]: value
+    };
+    setFormData(newFormData);
+    
+    // Save form data to localStorage (excluding passwords for security)
+    const dataToSave = {
+      name: newFormData.name,
+      email: newFormData.email
+    };
+    localStorage.setItem('shizuka_signup_data', JSON.stringify(dataToSave));
   };
 
   const handleSubmit = async (e) => {
@@ -44,6 +69,10 @@ const Signup = () => {
       await updateProfile(userCredential.user, {
         displayName: formData.name
       });
+      
+      // Clear saved form data after successful signup
+      localStorage.removeItem('shizuka_signup_data');
+      
       navigate('/');
     } catch (err) {
       setError(err.message);
@@ -90,51 +119,71 @@ const Signup = () => {
         </div>
 
         {/* Signup Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete="on">
           <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
             <input
+              id="name"
               type="text"
               name="name"
-              placeholder="Full name"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="name"
               required
             />
           </div>
 
           <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
             <input
+              id="email"
               type="email"
               name="email"
-              placeholder="Email address"
+              placeholder="Enter your email address"
               value={formData.email}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="email"
               required
             />
           </div>
 
           <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
             <input
+              id="password"
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Create a password (min 6 characters)"
               value={formData.password}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="new-password"
               required
             />
           </div>
 
           <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+              Confirm Password
+            </label>
             <input
+              id="confirmPassword"
               type="password"
               name="confirmPassword"
-              placeholder="Confirm password"
+              placeholder="Confirm your password"
               value={formData.confirmPassword}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="new-password"
               required
             />
           </div>

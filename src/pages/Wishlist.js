@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { FaTrash, FaShoppingCart, FaStar, FaArrowLeft, FaRegSadTear } from "react-icons/fa";
+import { FaTrash, FaShoppingCart, FaStar, FaArrowLeft, FaRegSadTear, FaRegHeart, FaHeart } from "react-icons/fa";
 import { auth } from '../firebase';
 
 // Helper to get token
@@ -73,7 +73,14 @@ const Wishlist = () => {
       }
     };
 
-    if (userId) fetchData();
+    if (userId) {
+      fetchData();
+    } else {
+      // If no user is authenticated, set loading to false and show empty state
+      setLoading(false);
+      setProducts([]);
+      setError(null);
+    }
     window.scrollTo(0, 0);
   }, [category, userId]);
 
@@ -206,6 +213,20 @@ const Wishlist = () => {
             >
               Try Again
             </button>
+          </div>
+        ) : !userId ? (
+          <div className="p-8 text-center bg-white rounded-lg shadow-sm max-w-3xl">
+            <div className="flex justify-center text-5xl text-gray-300 mb-4">
+              <FaHeart />
+            </div>
+            <h3 className="text-xl font-medium text-gray-700 mb-2">Please sign in to view your wishlist</h3>
+            <p className="text-gray-500 mb-6">You need to be logged in to see your saved items</p>
+            <Link 
+              to="/login" 
+              className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+            >
+              Sign In
+            </Link>
           </div>
         ) : products.length === 0 ? (
           <div className="p-8 text-center bg-white rounded-lg shadow-sm max-w-3xl">

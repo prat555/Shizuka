@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 import { useNavigate, Link } from 'react-router-dom';
@@ -7,17 +7,40 @@ import { FaGoogle } from 'react-icons/fa';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [resetEmailSent, setResetEmailSent] = useState(false);
   const navigate = useNavigate();
 
+  // Load saved credentials on component mount
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('shizuka_email');
+    const savedRememberMe = localStorage.getItem('shizuka_remember_me');
+    
+    if (savedEmail && savedRememberMe === 'true') {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      
+      // Save credentials if remember me is checked
+      if (rememberMe) {
+        localStorage.setItem('shizuka_email', email);
+        localStorage.setItem('shizuka_remember_me', 'true');
+      } else {
+        localStorage.removeItem('shizuka_email');
+        localStorage.removeItem('shizuka_remember_me');
+      }
+      
       navigate('/');
     } catch (err) {
       setError(err.message);
@@ -80,31 +103,54 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete="on">
           <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
             <input
+              id="email"
               type="email"
-              placeholder="Email address"
+              name="email"
+              placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="email"
               required
             />
           </div>
 
           <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
             <input
+              id="password"
               type="password"
-              placeholder="Password"
+              name="password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              autoComplete="current-password"
               required
             />
           </div>
 
-          {/* Forgot Password */}
-          <div className="text-right">
+          {/* Remember Me Checkbox */}
+          <div className="flex items-center justify-between">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+              />
+              <span className="ml-2 text-sm text-gray-700">Remember me</span>
+            </label>
+            
+            {/* Forgot Password */}
             <button
               type="button"
               onClick={handleForgotPassword}
