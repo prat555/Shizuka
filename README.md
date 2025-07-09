@@ -22,7 +22,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 - **Touch-Friendly**: Intuitive touch interactions
 - **Cross-Browser**: Compatible with modern web browsers
 
-
 ## 🛠️ Technologies Used
 
 ### Frontend
@@ -79,67 +78,6 @@ Shizuka is an e-commerce platform dedicated to sustainable and eco-friendly prod
 4. **Open your browser**
    Navigate to `http://localhost:3000` to view the application.
 
-## 📸 Screenshots
-
-### **Home Page**
-![Home Page](https://i.postimg.cc/9fVX9g6m/Screenshot-2025-05-01-090807.png)  
-*Featuring:*
-- Special offers carousel with promotional banners
-- Featured products showcase with ratings and pricing
-- Category navigation tiles for easy browsing
-- Location-aware delivery messaging
-- Responsive design for all screen sizes
-
-### **Shop Page**
-![Shop Page](https://i.postimg.cc/sfwb3HfF/Screenshot-2025-05-01-092346.png) 
-*Featuring:*
-- Comprehensive product catalog with detailed information
-- Advanced search and filtering capabilities
-- Shopping cart integration with quantity management
-- Wishlist functionality for saving favorite items
-- Quick purchase options for streamlined checkout
-- Customer ratings and reviews display
-
-## ��� Project Structure
-
-```
-shizuka/
-├── public/                    # Static assets and HTML template
-│   ├── images/               # Product and promotional images
-│   └── index.html           # Main HTML template
-├── src/
-│   ├── components/          # Reusable React components
-│   │   ├── Navbar.js       # Navigation component with auth
-│   │   ├── Footer.js       # Footer component
-│   │   └── ScrollToTop.js  # Scroll utility component
-│   ├── pages/              # Page-level components
-│   │   ├── Home.js         # Homepage with featured content
-│   │   ├── Shop.js         # Product catalog and shopping
-│   │   ├── Login.js        # Authentication login page
-│   │   ├── Signup.js       # User registration page
-│   │   ├── Cart.js         # Shopping cart management
-│   │   ├── Wishlist.js     # Saved items page
-│   │   └── Checkout.js     # Order completion page
-│   ├── firebase.js         # Firebase configuration and setup
-│   ├── App.js              # Main application component
-│   ├── App.css             # Global application styles
-│   └── index.js            # Application entry point
-├── backend/                 # Backend API server
-│   ├── models/             # MongoDB data models
-│   ├── routes/             # Express.js API routes
-│   └── server.js           # Backend server entry point
-├── .env                    # Environment variables (not in repo)
-├── .gitignore             # Git ignore rules
-├── package.json           # Frontend dependencies and scripts
-├── tailwind.config.js     # Tailwind CSS configuration
-├── postcss.config.js      # PostCSS configuration
-└── README.md              # Project documentation
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - **UN Sustainable Development Goals** (SDG 12, 15) for inspiration
@@ -150,10 +88,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Vercel & Render** for providing excellent hosting platforms
 - **Open Source Community** for the amazing tools and libraries
 
----
+## 📄 License
 
-🌱 **Building a sustainable future, one purchase at a time with Shizuka!** ♻️
-
-*Made with ❤️ for a greener tomorrow*
-
-can u make it better by explaining features in concise
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
