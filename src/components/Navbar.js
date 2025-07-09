@@ -2,14 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaHeart, FaShoppingCart, FaBars, FaMapMarkerAlt, FaSearch, FaGlobe, FaUserCircle, FaLocationArrow, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { auth } from '../firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [locationPermission, setLocationPermission] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("Select Location");
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const profileRef = useRef(null);
@@ -68,6 +72,22 @@ const Navbar = () => {
   const toggleMobileSearch = () => {
     setShowMobileSearch(!showMobileSearch);
     if (mobileMenuOpen) setMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   useEffect(() => {
@@ -154,7 +174,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Profile Dropdown with Tooltip */}
+          {/* Menu Dropdown */}
           <div 
             className="relative group"
             ref={profileRef}
@@ -173,19 +193,49 @@ const Navbar = () => {
                 onMouseEnter={() => openDropdown(setShowDropdown)}
                 onMouseLeave={() => closeDropdown(setShowDropdown)}
               >
-                <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">
-                  My Profile
-                </button>
-                <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Orders & Payments</button>
-                <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Returns & Cancellations</button>
-                <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Rewards</button>
-                <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Customer Care</button>
-                <button
-                  onClick={() => setIsLoggedIn(false)}
-                  className="block w-full text-left px-4 py-2 text-red-400 hover:bg-gray-700"
-                >
-                  Logout
-                </button>
+                {user ? (
+                  // Logged in menu
+                  <>
+                    <div className="px-4 py-3 border-b border-gray-700">
+                      <div className="text-sm text-green-400 font-medium">Welcome!</div>
+                      <div className="text-sm text-gray-300 truncate">
+                        {user.displayName || user.email?.split('@')[0] || 'User'}
+                      </div>
+                    </div>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">
+                      My Profile
+                    </button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Orders & Payments</button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Returns & Cancellations</button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Rewards</button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Customer Care</button>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-red-400 hover:bg-gray-700"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  // Not logged in menu
+                  <>
+                    <button 
+                      onClick={() => navigate('/signup')}
+                      className="block w-full text-left px-4 py-2 text-green-400 hover:bg-gray-700"
+                    >
+                      Create Account
+                    </button>
+                    <button 
+                      onClick={() => navigate('/login')}
+                      className="block w-full text-left px-4 py-2 text-blue-400 hover:bg-gray-700"
+                    >
+                      Sign In
+                    </button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">
+                      Customer Care
+                    </button>
+                  </>
+                )}
               </motion.div>
             )}
           </div>
@@ -262,50 +312,90 @@ const Navbar = () => {
             </div>
             
             <div className="p-2">
-              <Link 
-                to="/profile" 
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                My Profile
-              </Link>
-              <Link 
-                to="/orders" 
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Orders & Payments
-              </Link>
-              <Link 
-                to="/returns" 
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Returns & Cancellations
-              </Link>
-              <Link 
-                to="/rewards" 
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Rewards
-              </Link>
-              <Link 
-                to="/support" 
-                className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Customer Care
-              </Link>
-              <button
-                onClick={() => {
-                  setIsLoggedIn(false);
-                  setMobileMenuOpen(false);
-                }}
-                className="block w-full text-left px-4 py-3 text-red-400 hover:bg-gray-700 rounded-lg"
-              >
-                Logout
-              </button>
+              {user ? (
+                // Logged in mobile menu
+                <>
+                  <div className="px-4 py-3 border-b border-gray-700 mb-2">
+                    <div className="text-sm text-green-400 font-medium">Welcome!</div>
+                    <div className="text-sm text-gray-300 truncate">
+                      {user.displayName || user.email?.split('@')[0] || 'User'}
+                    </div>
+                  </div>
+                  <Link 
+                    to="/profile" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    My Profile
+                  </Link>
+                  <Link 
+                    to="/orders" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Orders & Payments
+                  </Link>
+                  <Link 
+                    to="/returns" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Returns & Cancellations
+                  </Link>
+                  <Link 
+                    to="/rewards" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Rewards
+                  </Link>
+                  <Link 
+                    to="/support" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Customer Care
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-3 text-red-400 hover:bg-gray-700 rounded-lg"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                // Not logged in mobile menu
+                <>
+                  <button
+                    onClick={() => {
+                      navigate('/signup');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-3 text-green-400 hover:bg-gray-700 rounded-lg"
+                  >
+                    Create Account
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/login');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-3 text-blue-400 hover:bg-gray-700 rounded-lg"
+                  >
+                    Sign In
+                  </button>
+                  <Link 
+                    to="/support" 
+                    className="block px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Customer Care
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}

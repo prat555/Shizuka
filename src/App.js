@@ -9,6 +9,8 @@ import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import "tailwindcss/tailwind.css";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path="/wish" element={<Wishlist />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
         <Footer />

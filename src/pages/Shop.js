@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
+import { auth } from '../firebase';
+
+// Helper to get token
+async function getAuthHeader() {
+  const user = auth.currentUser;
+  if (user) {
+    const token = await user.getIdToken();
+    return { Authorization: `Bearer ${token}` };
+  }
+  return {};
+}
 
 const Shop = () => {
-  const userId = "user123";
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,8 +51,12 @@ const Shop = () => {
 
         const [productsRes, wishlistRes, cartRes] = await Promise.all([
           fetch(apiUrl),
-          fetch(`https://shizuka-backend.onrender.com/wishlist/${userId}`),
-          fetch(`https://shizuka-backend.onrender.com/cart/${userId}`)
+          fetch(`https://shizuka-backend.onrender.com/wishlist/${auth.currentUser?.uid}`, {
+            headers: await getAuthHeader(),
+          }),
+          fetch(`https://shizuka-backend.onrender.com/cart/${auth.currentUser?.uid}`, {
+            headers: await getAuthHeader(),
+          })
         ]);
 
         if (!productsRes.ok) throw new Error("Failed to fetch products.");
@@ -77,9 +91,9 @@ const Shop = () => {
     try {
       const response = await fetch("https://shizuka-backend.onrender.com/wishlist/toggle", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await getAuthHeader()) },
         body: JSON.stringify({
-          userId,
+          userId: auth.currentUser?.uid,
           productId: product._id,
           name: product.name,
           price: product.price,
@@ -115,9 +129,9 @@ const Shop = () => {
   
       const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await getAuthHeader()) },
         body: JSON.stringify({ 
-          userId, 
+          userId: auth.currentUser?.uid, 
           productId: product._id,
           quantity: quantity
         }),
@@ -164,7 +178,23 @@ const Shop = () => {
       )}
 
       {/* Loading and Error Handling */}
-      {loading && <p className="text-center text-gray-700 text-lg">Loading products...</p>}
+      {loading && (
+        <div className="flex flex-wrap justify-center items-start gap-6 w-full">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center w-72 min-h-[420px] animate-pulse">
+              <div className="w-48 h-48 bg-gray-200 rounded-lg mb-2 shadow-md"></div>
+              <div className="h-5 bg-gray-200 rounded w-64 mb-2"></div>
+              <div className="h-3 bg-gray-200 rounded w-56 mb-2"></div>
+              <div className="h-5 bg-gray-200 rounded w-32 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-40 mb-2"></div>
+              <div className="flex space-x-2 mt-2 w-full justify-center">
+                <div className="h-7 bg-gray-200 rounded w-24"></div>
+                <div className="h-7 bg-gray-200 rounded w-20"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {error && <p className="text-center text-red-500 text-lg">{error}</p>}
       {!loading && !error && products.length === 0 && (
         <p className="text-center text-gray-500 text-lg">

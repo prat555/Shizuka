@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTrash, FaShoppingCart, FaArrowLeft, FaStar, FaRegSadTear } from "react-icons/fa";
+import { auth } from '../firebase';
+
+// Helper to get token
+async function getAuthHeader() {
+  const user = auth.currentUser;
+  if (user) {
+    const token = await user.getIdToken();
+    return { Authorization: `Bearer ${token}` };
+  }
+  return {};
+}
 
 const Cart = () => {
   const navigate = useNavigate();
-  const userId = "user123"; // Replace with dynamic user ID
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +25,8 @@ const Cart = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`https://shizuka-backend.onrender.com/cart/${userId}`);
+        const headers = await getAuthHeader();
+        const response = await fetch(`https://shizuka-backend.onrender.com/cart/${auth.currentUser?.uid}`, { headers });
         if (!response.ok) throw new Error("Failed to fetch cart items.");
         
         const data = await response.json();
@@ -35,11 +46,12 @@ const Cart = () => {
     if (newQuantity < 1) return;
     
     try {
+      const headers = await getAuthHeader();
       const response = await fetch("https://shizuka-backend.onrender.com/cart/update", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...headers },
         body: JSON.stringify({
-          userId,
+          userId: auth.currentUser?.uid,
           productId,
           quantity: newQuantity
         }),
@@ -59,10 +71,11 @@ const Cart = () => {
 
   const removeItem = async (productId) => {
     try {
+      const headers = await getAuthHeader();
       const response = await fetch(`https://shizuka-backend.onrender.com/cart/remove/${productId}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId })
+        headers: { "Content-Type": "application/json", ...headers },
+        body: JSON.stringify({ userId: auth.currentUser?.uid })
       });
   
       if (!response.ok) throw new Error("Failed to remove item from cart.");
@@ -150,9 +163,7 @@ const Cart = () => {
           <div className="bg-white rounded-lg shadow-sm overflow-hidden">
             {loading ? (
               <>
-                <CartItemSkeleton />
-                <CartItemSkeleton />
-                <CartItemSkeleton />
+                {[...Array(3)].map((_, i) => <CartItemSkeleton key={i} />)}
               </>
             ) : error ? (
               <div className="p-8 text-center">
@@ -192,7 +203,6 @@ const Cart = () => {
                           className="h-full w-full object-contain rounded-lg shadow-sm group-hover:shadow-md transition-shadow"
                         />
                       </div>
-
                       {/* Product Info */}
                       <div className="sm:ml-4 flex-1 flex flex-col justify-between">
                         <div>
@@ -202,7 +212,6 @@ const Cart = () => {
                                 {item.name}
                               </h3>
                             </div>
-                            
                             {/* Price and Discount */}
                             <div className="text-right">
                               <div className="flex flex-col items-end">
@@ -216,7 +225,6 @@ const Cart = () => {
                             </div>
                           </div>
                         </div>
-
                         <div className="flex items-center justify-between mt-4">
                           {/* Quantity Controls */}
                           <div className="flex items-center bg-green-600 text-white rounded-md shadow-md">
@@ -235,7 +243,6 @@ const Cart = () => {
                               +
                             </button>
                           </div>
-
                           {/* Remove Button */}
                           <button
                             onClick={() => removeItem(item.productId)}
