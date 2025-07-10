@@ -205,10 +205,8 @@ const Navbar = () => {
                     <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">
                       My Profile
                     </button>
-                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Orders & Payments</button>
-                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Returns & Cancellations</button>
-                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Rewards</button>
                     <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Customer Care</button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700">Settings</button>                                  
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-red-400 hover:bg-gray-700"
