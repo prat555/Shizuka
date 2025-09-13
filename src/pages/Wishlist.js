@@ -160,7 +160,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+    <div className="p-4 md:p-6 bg-gray-75 min-h-screen">
       {/* Page Header */}
       <div className="max-w-6xl mx-auto mb-6 md:mb-8">
         <div className="flex items-center mb-2">
@@ -246,29 +246,39 @@ const Wishlist = () => {
           </div>
         ) : (
           <div className="flex flex-wrap justify-center items-start gap-6 w-full">
-            {products.map((product) => (
+            {products.map((product) => {
+              const discountPercentage = product?.mrp && product.mrp > 0
+                ? Math.max(0, Math.round(((product.mrp - product.price) / product.mrp) * 100))
+                : null;
+              return (
               <div
                 key={product._id}
-                className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center w-72 border border-gray-200 transition-transform transform hover:scale-105 relative"
+                className="group bg-white p-4 rounded-xl shadow-sm hover:shadow-xl flex flex-col items-center w-72 border border-gray-100 transition-all duration-200 hover:scale-[1.02] relative hover:ring-1 hover:ring-green-200"
               >
                 {/* Remove Button */}
                 <button
                   onClick={() => removeFromWishlist(product)}
-                  className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+                  className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-transform duration-200 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 rounded"
                 >
                   <FaTrash className="text-lg" />
                 </button>
+                {/* Discount Badge */}
+                {discountPercentage > 0 && (
+                  <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm">
+                    {discountPercentage}% OFF
+                  </div>
+                )}
                 <img 
                   src={product.image} 
                   alt={product.name} 
-                  className="w-48 h-48 object-contain mb-2 rounded-lg shadow-md"
+                  className="w-48 h-48 object-contain mb-2 rounded-lg shadow-sm group-hover:shadow-md transition-shadow"
                 />
                 <h2 className="text-lg font-semibold text-gray-800 text-center w-64 truncate">{product.name}</h2>
                 <p className="text-xs text-gray-600 text-center">
                   {expanded[product._id] ? product.description : `${product.description.slice(0, 50)}...`}
                   <button 
                     onClick={() => toggleReadMore(product._id)} 
-                    className="text-blue-600 font-medium ml-1"
+                    className="text-blue-600 hover:underline font-medium ml-1"
                   >
                     {expanded[product._id] ? "Read Less" : "Read More"}
                   </button>
@@ -277,7 +287,9 @@ const Wishlist = () => {
                 <div className="flex items-center space-x-2 mt-2">
                   <p className="text-lg font-bold text-green-700">₹{product.price}</p>
                   <p className="text-gray-500 line-through">₹{product.mrp}</p>
-                  <p className="text-md font-bold text-green-500">({product.discount})</p>
+                  {discountPercentage !== null && (
+                    <p className="text-md font-bold text-green-600">({discountPercentage}% OFF)</p>
+                  )}
                 </div>
                 {/* Ratings */}
                 <div className="flex items-center space-x-1 mt-1">
@@ -303,28 +315,28 @@ const Wishlist = () => {
                     <div className="flex items-center bg-green-600 text-white px-3 py-1 h-7 rounded shadow-md">
                       <button 
                         onClick={() => updateCart(product, cart[product._id] - 1)} 
-                        className="px-1 font-bold"
+                        className="px-1 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
                       >−</button>
                       <span className="px-2 font-semibold">{cart[product._id]}</span>
                       <button 
                         onClick={() => updateCart(product, cart[product._id] + 1)} 
-                        className="px-1 font-bold"
+                        className="px-1 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
                       >+</button>
                     </div>
                   ) : (
                     <button 
                       onClick={() => updateCart(product, 1)} 
-                      className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 flex items-center text-sm shadow-md"
+                      className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 flex items-center text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
                     >
                       <FaShoppingCart className="mr-1" /> Add to Cart
                     </button>
                   )}
-                  <button className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md">
+                  <button className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400">
                     Buy Now
                   </button>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         )}
       </div>

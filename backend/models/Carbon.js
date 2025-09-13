@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 // Carbon Activity Schema for individual carbon tracking activities
 const carbonActivitySchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String, // Firebase UID
     required: true
   },
   type: {
@@ -61,8 +60,7 @@ const carbonActivitySchema = new mongoose.Schema({
 // Carbon Profile Schema for user's overall carbon footprint profile
 const carbonProfileSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String, // Firebase UID
     required: true,
     unique: true
   },
@@ -211,8 +209,7 @@ const carbonProfileSchema = new mongoose.Schema({
 // Carbon Goal Schema for tracking user's carbon reduction goals
 const carbonGoalSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String, // Firebase UID
     required: true
   },
   title: {

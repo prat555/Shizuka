@@ -24,6 +24,11 @@ const Login = () => {
     }
   }, []);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -77,8 +82,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center px-4 py-8">
+      <div className="bg-white rounded-xl shadow-sm ring-1 ring-gray-100 p-8 w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Sign In</h1>
@@ -89,7 +94,7 @@ const Login = () => {
         <button
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-50 transition duration-300 mb-4 disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-50 transition duration-300 mb-4 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
         >
           <FaGoogle className="text-red-500" />
           Continue with Google
@@ -154,7 +159,7 @@ const Login = () => {
             <button
               type="button"
               onClick={handleForgotPassword}
-              className="text-green-600 hover:text-green-800 text-sm"
+              className="text-green-600 hover:text-green-800 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 rounded"
             >
               Forgot password?
             </button>
@@ -178,7 +183,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 disabled:opacity-50"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

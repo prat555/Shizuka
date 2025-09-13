@@ -89,6 +89,12 @@ const Shop = () => {
   };
 
   const toggleWishlist = async (product) => {
+    // Check if user is authenticated
+    if (!auth.currentUser) {
+      navigate('/login');
+      return;
+    }
+
     try {
       const response = await fetch("https://shizuka-backend.onrender.com/wishlist/toggle", {
         method: "POST",
@@ -115,6 +121,12 @@ const Shop = () => {
   };
 
   const updateCart = async (product, quantity) => {
+    // Check if user is authenticated
+    if (!auth.currentUser) {
+      navigate('/login');
+      return;
+    }
+
     try {
       let url, method;
       
@@ -155,7 +167,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="p-6 flex flex-wrap justify-center items-start gap-6 bg-gray-100 min-h-screen">
+    <div className="p-6 flex flex-wrap justify-center items-start gap-6 bg-gray-75 min-h-screen">
       {/* Wishlist Message */}
       {wishlistMessage && (
         <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-md shadow-lg z-50">
@@ -163,20 +175,7 @@ const Shop = () => {
         </div>
       )}
 
-      {/* Search Results Header */}
-      {!loading && !error && searchQuery && (
-        <div className="w-full text-center mb-4">
-          <p className="text-gray-700">
-            Showing results for: <span className="font-semibold">"{searchQuery}"</span>
-          </p>
-          <button 
-            onClick={() => navigate('/shop')}
-            className="text-blue-600 hover:underline mt-2"
-          >
-            Clear search
-          </button>
-        </div>
-      )}
+      {/* Search Results Header removed: query will be reflected in Navbar search input */}
 
       {/* Loading and Error Handling */}
       {loading && (
@@ -206,24 +205,35 @@ const Shop = () => {
       {/* Product List */}  
       {!loading &&
         !error &&
-        products.map((product) => (
+        products.map((product) => {
+          const discountPercentage = product?.mrp && product.mrp > 0
+            ? Math.max(0, Math.round(((product.mrp - product.price) / product.mrp) * 100))
+            : null;
+          return (
           <div
             key={product._id}
-            className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center w-72 border border-gray-200 transition-transform transform hover:scale-105 relative"
+            className="group bg-white p-4 rounded-xl shadow-sm hover:shadow-xl flex flex-col items-center w-72 border border-gray-100 transition-all duration-200 hover:scale-[1.02] relative hover:ring-1 hover:ring-green-200"
           >
             {/* Wishlist Button */}
             <button
               onClick={() => toggleWishlist(product)}
-              className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+              className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition-transform duration-200 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 rounded"
             >
               <FaHeart className={`text-lg ${wishlist[product._id] ? "text-red-400" : ""}`} />
             </button>
 
-            <img src={product.image} alt={product.name} className="w-48 h-48 object-contain mb-2 rounded-lg shadow-md" />
+            {/* Discount Badge */}
+            {discountPercentage > 0 && (
+              <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm">
+                {discountPercentage}% OFF
+              </div>
+            )}
+
+            <img src={product.image} alt={product.name} className="w-48 h-48 object-contain mb-2 rounded-lg shadow-sm group-hover:shadow-md transition-shadow" />
             <h2 className="text-lg font-semibold text-gray-800 text-center w-64 truncate">{product.name}</h2>
             <p className="text-xs text-gray-600 text-center">
               {expanded[product._id] ? product.description : `${product.description.slice(0, 50)}...`}
-              <button onClick={() => toggleReadMore(product._id)} className="text-blue-600 font-medium ml-1">
+              <button onClick={() => toggleReadMore(product._id)} className="text-blue-600 hover:underline font-medium ml-1">
                 {expanded[product._id] ? "Read Less" : "Read More"}
               </button>
             </p>
@@ -232,7 +242,9 @@ const Shop = () => {
             <div className="flex items-center space-x-2 mt-2">
               <p className="text-lg font-bold text-green-700">₹{product.price}</p>
               <p className="text-gray-500 line-through">₹{product.mrp}</p>
-              <p className="text-md font-bold text-green-500">({product.discount})</p>
+              {discountPercentage !== null && (
+                <p className="text-md font-bold text-green-600">({discountPercentage}% OFF)</p>
+              )}
             </div>
 
             {/* Ratings */}
@@ -252,34 +264,42 @@ const Shop = () => {
             <div className="flex space-x-2 mt-2">
               {cart[product._id] ? (
                 <div className="flex items-center bg-green-600 text-white px-3 py-1 h-7 rounded shadow-md">
-                  <button onClick={() => updateCart(product, cart[product._id] - 1)} className="px-1 font-bold">−</button>
+                  <button onClick={() => updateCart(product, cart[product._id] - 1)} className="px-1 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded">−</button>
                   <span className="px-2 font-semibold">{cart[product._id]}</span>
-                  <button onClick={() => updateCart(product, cart[product._id] + 1)} className="px-1 font-bold">+</button>
+                  <button onClick={() => updateCart(product, cart[product._id] + 1)} className="px-1 font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded">+</button>
                 </div>
               ) : (
-                <button onClick={() => updateCart(product, 1)} className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 flex items-center text-sm shadow-md">
+                <button onClick={() => updateCart(product, 1)} className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 flex items-center text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400">
                   <FaShoppingCart className="mr-1" /> Add to Cart
                 </button>
               )}
               <button 
-                onClick={() => navigate('/checkout', { 
-                  state: { 
-                    cartItems: [{
-                      productId: product._id,
-                      name: product.name,
-                      price: product.price,
-                      quantity: 1,
-                      image: product.image
-                    }] 
-                  } 
-                })} 
-                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md"
+                onClick={() => {
+                  // Check if user is authenticated
+                  if (!auth.currentUser) {
+                    navigate('/login');
+                    return;
+                  }
+                  
+                  navigate('/checkout', { 
+                    state: { 
+                      cartItems: [{
+                        productId: product._id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1,
+                        image: product.image
+                      }] 
+                    } 
+                  });
+                }} 
+                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
               >
                 Buy Now
               </button>
             </div>
           </div>
-        ))}
+        )})}
     </div>
   );
 };

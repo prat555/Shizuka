@@ -155,7 +155,7 @@ const Checkout = () => {
 
   if (orderSuccess) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-75 flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
           <div className="text-green-500 text-6xl mb-4">✓</div>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Order Confirmed!</h1>
@@ -206,16 +206,25 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gray-75 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <Link
-          to="/cart"
-          className="flex items-center mb-6 text-green-600 hover:text-green-700 font-medium transition-colors"
-        >
-          <FaArrowLeft className="mr-2" /> Back to Cart
-        </Link>
-
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Checkout</h1>
+        {/* Page Header */}
+        <div className="mb-6 md:mb-8">
+          <div className="flex items-center mb-2">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Checkout</h1>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <p className="text-gray-600 mb-2 md:mb-0">
+              Complete your purchase securely
+            </p>
+            <Link 
+              to="/cart" 
+              className="text-green-600 hover:text-green-700 font-medium flex items-center transition-colors"
+            >
+              <FaArrowLeft className="mr-1" /> Back to Cart
+            </Link>
+          </div>
+        </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Column - Shipping & Payment */}
@@ -335,14 +344,14 @@ const Checkout = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500">
+                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500 focus-within:ring-2 focus-within:ring-green-400">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="credit-card"
                       checked={formData.paymentMethod === "credit-card"}
                       onChange={handleChange}
-                      className="mr-3"
+                      className="mr-3 focus:outline-none"
                     />
                     <div>
                       <div className="flex items-center">
@@ -352,14 +361,14 @@ const Checkout = () => {
                     </div>
                   </label>
 
-                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500">
+                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500 focus-within:ring-2 focus-within:ring-green-400">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="upi"
                       checked={formData.paymentMethod === "upi"}
                       onChange={handleChange}
-                      className="mr-3"
+                      className="mr-3 focus:outline-none"
                     />
                     <div>
                       <div className="flex items-center">
@@ -369,14 +378,14 @@ const Checkout = () => {
                     </div>
                   </label>
 
-                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500">
+                  <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:border-green-500 focus-within:ring-2 focus-within:ring-green-400">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="cod"
                       checked={formData.paymentMethod === "cod"}
                       onChange={handleChange}
-                      className="mr-3"
+                      className="mr-3 focus:outline-none"
                     />
                     <div>
                       <div className="flex items-center">
@@ -407,7 +416,7 @@ const Checkout = () => {
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors flex items-center justify-center"
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
               >
                 {isProcessing ? (
                   "Processing..."

@@ -140,7 +140,7 @@ const Cart = () => {
   );
 
   return (
-    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+    <div className="p-4 md:p-6 bg-gray-75 min-h-screen">
       {/* Page Header */}
       <div className="max-w-6xl mx-auto mb-6 md:mb-8">
         <div className="flex items-center mb-2">
@@ -181,7 +181,7 @@ const Cart = () => {
                 <p className="text-red-500 text-lg">{error}</p>
                 <button 
                   onClick={() => window.location.reload()}
-                  className="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors"
+                  className="mt-4 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
                 >
                   Try Again
                 </button>
@@ -195,7 +195,7 @@ const Cart = () => {
                 <p className="text-gray-500 mb-6">You need to be logged in to see your cart items</p>
                 <Link 
                   to="/login" 
-                  className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+                  className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
                 >
                   Sign In
                 </Link>
@@ -209,7 +209,7 @@ const Cart = () => {
                 <p className="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet</p>
                 <Link 
                   to="/shop" 
-                  className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+                  className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
                 >
                   <FaShoppingCart className="mr-2" />
                   Start Shopping
@@ -260,14 +260,14 @@ const Cart = () => {
                             <button 
                               onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                               disabled={item.quantity <= 1}
-                              className="px-3 py-1 font-bold disabled:opacity-30 transition-colors"
+                              className="px-3 py-1 font-bold disabled:opacity-30 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
                             >
                               −
                             </button>
                             <span className="px-3 font-semibold border-x border-green-600">{item.quantity}</span>
                             <button 
                               onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                              className="px-3 py-1 font-bold transition-colors"
+                              className="px-3 py-1 font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
                             >
                               +
                             </button>
@@ -275,7 +275,7 @@ const Cart = () => {
                           {/* Remove Button */}
                           <button
                             onClick={() => removeItem(item.productId)}
-                            className="text-gray-500 hover:text-red-500 flex items-center transition-colors"
+                            className="text-gray-500 hover:text-red-500 flex items-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-300 rounded"
                           >
                             <FaTrash className="mr-1" /> Remove
                           </button>
@@ -323,7 +323,7 @@ const Cart = () => {
 
               <button 
                 onClick={() => navigate('/checkout', { state: { cartItems } })}
-                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+                className="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition-colors shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
               >
                 Proceed to Checkout
               </button>

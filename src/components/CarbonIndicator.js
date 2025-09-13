@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLeaf, FaExclamationTriangle, FaTree } from 'react-icons/fa';
 
 const CarbonIndicator = ({ 
@@ -165,6 +165,7 @@ export const CarbonBadge = ({ productName, size = 'xs', ...props }) => {
 
 // Detailed variant with tooltip
 export const CarbonIndicatorDetailed = ({ productName, ...props }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const carbonData = productName ? (() => {
     const name = productName.toLowerCase();
     if (name.includes('bamboo')) return { savings: 2.1, emissions: 0.3, material: 'Bamboo', benefit: 'Fast-growing, carbon-absorbing material' };
@@ -174,35 +175,58 @@ export const CarbonIndicatorDetailed = ({ productName, ...props }) => {
   })() : { savings: 0, emissions: 0 };
 
   const netImpact = carbonData.savings - carbonData.emissions;
+  const isPositive = netImpact > 0;
+  const isNegative = netImpact < 0;
+  const ThemedIcon = isPositive ? FaLeaf : isNegative ? FaExclamationTriangle : FaTree;
+  const titleColor = isPositive ? 'text-green-300' : isNegative ? 'text-red-300' : 'text-gray-300';
+  const borderColor = isPositive ? 'border-green-600' : isNegative ? 'border-red-600' : 'border-gray-600';
 
   return (
-    <div className="group relative">
+    <div
+      className="relative inline-block focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 rounded-full cursor-help"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      onFocus={() => setShowTooltip(true)}
+      onBlur={() => setShowTooltip(false)}
+      tabIndex={0}
+      aria-label="Carbon impact details"
+    >
       <CarbonIndicator productName={productName} size="sm" {...props} />
-      
+
       {/* Tooltip */}
-      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
-        <div className="bg-gray-800 text-white text-xs rounded-lg px-3 py-2 min-w-48">
-          <div className="font-semibold mb-1">{carbonData.material}</div>
-          <div className="text-gray-300 mb-2">{carbonData.benefit}</div>
-          <div className="border-t border-gray-600 pt-1">
-            <div className="flex justify-between">
-              <span>Carbon saved:</span>
-              <span className="text-green-400">{carbonData.savings.toFixed(1)} kg CO₂</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Production cost:</span>
-              <span className="text-orange-400">{carbonData.emissions.toFixed(1)} kg CO₂</span>
-            </div>
-            <div className="flex justify-between font-bold border-t border-gray-600 pt-1 mt-1">
-              <span>Net impact:</span>
-              <span className={netImpact > 0 ? 'text-green-400' : 'text-red-400'}>
-                {netImpact > 0 ? '-' : '+'}{Math.abs(netImpact).toFixed(1)} kg CO₂
-              </span>
+      {showTooltip && (
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-10">
+          <div className={`transform transition duration-150 ease-out origin-bottom opacity-100 scale-100`}>
+            <div className={`bg-gray-900 text-white text-xs rounded-xl px-3.5 py-3 w-64 shadow-xl border ${borderColor}`}>
+              <div className="flex items-center mb-2">
+                <ThemedIcon className={`${titleColor} mr-2`} />
+                <span className={`font-semibold ${titleColor}`}>Environmental impact</span>
+              </div>
+              <div className="text-gray-300 mb-2">
+                <div className="font-medium text-gray-100">{carbonData.material}</div>
+                <div className="text-gray-300">{carbonData.benefit}</div>
+              </div>
+              <div className="border-t border-gray-700 pt-2 space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-gray-300">Carbon saved:</span>
+                  <span className="text-green-400 font-semibold">{carbonData.savings.toFixed(1)} kg CO₂</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-300">Production cost:</span>
+                  <span className="text-orange-400 font-semibold">{carbonData.emissions.toFixed(1)} kg CO₂</span>
+                </div>
+                <div className="flex justify-between font-bold border-t border-gray-700 pt-2 mt-1">
+                  <span>Net impact:</span>
+                  <span className={isPositive ? 'text-green-400' : isNegative ? 'text-red-400' : 'text-gray-200'}>
+                    {isPositive ? '-' : isNegative ? '+' : ''}{Math.abs(netImpact).toFixed(1)} kg CO₂
+                  </span>
+                </div>
+              </div>
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
             </div>
           </div>
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
