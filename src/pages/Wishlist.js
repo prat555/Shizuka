@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { FaTrash, FaShoppingCart, FaStar, FaArrowLeft, FaRegSadTear, FaRegHeart, FaHeart } from "react-icons/fa";
 import { auth } from '../firebase';
-import CarbonIndicator from "../components/CarbonIndicator";
+import { CarbonIndicatorDetailed } from "../components/CarbonIndicator";
 
 // Helper to get token
 async function getAuthHeader() {
@@ -24,6 +24,7 @@ const Wishlist = () => {
   const [cart, setCart] = useState({});
 
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
 
@@ -283,6 +284,12 @@ const Wishlist = () => {
                     {expanded[product._id] ? "Read Less" : "Read More"}
                   </button>
                 </p>
+
+                {/* Carbon Impact Indicator */}
+                <div className="flex justify-center mt-2">
+                  <CarbonIndicatorDetailed productName={product.name} />
+                </div>
+
                 {/* Price and Discount */}
                 <div className="flex items-center space-x-2 mt-2">
                   <p className="text-lg font-bold text-green-700">₹{product.price}</p>
@@ -302,11 +309,6 @@ const Wishlist = () => {
                   <span className="text-sm text-gray-600 ml-1">
                     {product.rating} ({product.ratingCount})
                   </span>
-                </div>
-                
-                {/* Carbon Impact Indicator */}
-                <div className="flex justify-center mt-2">
-                  <CarbonIndicator productName={product.name} size="sm" />
                 </div>
                 
                 {/* Buttons */}
@@ -331,7 +333,28 @@ const Wishlist = () => {
                       <FaShoppingCart className="mr-1" /> Add to Cart
                     </button>
                   )}
-                  <button className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400">
+                  <button 
+                    onClick={() => {
+                      // Check if user is authenticated
+                      if (!auth.currentUser) {
+                        navigate('/login');
+                        return;
+                      }
+                      
+                      navigate('/checkout', { 
+                        state: { 
+                          cartItems: [{
+                            productId: product._id,
+                            name: product.name,
+                            price: product.price,
+                            quantity: 1,
+                            image: product.image
+                          }] 
+                        } 
+                      });
+                    }} 
+                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+                  >
                     Buy Now
                   </button>
                 </div>

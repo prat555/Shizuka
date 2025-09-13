@@ -238,6 +238,11 @@ const Shop = () => {
               </button>
             </p>
 
+            {/* Carbon Impact Indicator */}
+            <div className="flex justify-center mt-2">
+              <CarbonIndicatorDetailed productName={product.name} />
+            </div>
+
             {/* Price and Discount */}
             <div className="flex items-center space-x-2 mt-2">
               <p className="text-lg font-bold text-green-700">₹{product.price}</p>
@@ -253,11 +258,6 @@ const Shop = () => {
                 <FaStar key={i} className={i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"} />
               ))}
               <span className="text-sm text-gray-600 ml-1">{product.rating} ({product.ratingCount})</span>
-            </div>
-
-            {/* Carbon Impact Indicator */}
-            <div className="flex justify-center mt-2">
-              <CarbonIndicatorDetailed productName={product.name} />
             </div>
 
             {/* Buttons */}

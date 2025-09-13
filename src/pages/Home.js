@@ -335,7 +335,13 @@ const Home = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center mt-2">
                   <p className="text-lg font-semibold text-gray-800 truncate">{product.name}</p>
-                  <div className="flex items-center justify-center space-x-2">
+                  
+                  {/* Carbon Impact Indicator */}
+                  <div className="flex justify-center mt-2">
+                    <CarbonIndicatorDetailed productName={product.name} />
+                  </div>
+                  
+                  <div className="flex items-center justify-center space-x-2 mt-2">
                     <p className="text-lg font-bold text-green-700">₹{product.price}</p>
                     <p className="text-gray-500 line-through">₹{product.mrp}</p>
                     {Number(discountPercentage) > 0 && (
@@ -348,11 +354,6 @@ const Home = () => {
                     <FaStar key={i} className={i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"} />
                   ))}
                   <span className="text-sm text-gray-600">({product.ratingCount || 0})</span>
-                </div>
-                
-                {/* Carbon Impact Indicator */}
-                <div className="flex justify-center mt-2">
-                  <CarbonIndicatorDetailed productName={product.name} />
                 </div>
                 
                 <button 
@@ -375,7 +376,7 @@ const Home = () => {
                       } 
                     });
                   }} 
-                  className="mt-2 bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm flex items-center mx-auto shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+                  className="mt-2 bg-green-600 text-white px-5 py-1 rounded hover:bg-green-700 text-sm flex items-center mx-auto shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
                 >
                   Buy Now
                 </button>
