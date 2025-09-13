@@ -5,7 +5,8 @@ const connectDB = require("./config/db");
 
 const wishlistRoutes = require("./routes/wishlist");
 const productRoutes = require("./routes/products");
-const cartRoutes = require("./routes/cart"); 
+const cartRoutes = require("./routes/cart");
+const carbonRoutes = require("./routes/carbon");
 
 // Load environment variables
 dotenv.config();
@@ -36,6 +37,7 @@ connectDB()
 app.use("/wishlist", wishlistRoutes);
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
+app.use("/api/carbon", carbonRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

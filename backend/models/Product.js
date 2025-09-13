@@ -12,6 +12,20 @@ const productSchema = new mongoose.Schema({
   featured: { type: Boolean, default: false }, // Flag for featured products
   rating: { type: Number, default: 0, min: 0, max: 5 },
   ratingCount: { type: Number, default: 0 },
+  
+  // Carbon footprint information
+  carbonFootprint: {
+    emissionsFactor: { type: Number, default: 0 }, // kg CO2 per unit
+    isEcoFriendly: { type: Boolean, default: false },
+    carbonSavings: { type: Number, default: 0 }, // kg CO2 saved compared to conventional alternative
+    sustainabilityScore: { type: Number, default: 0, min: 0, max: 100 }, // 0-100 sustainability rating
+    materials: [String], // eco-friendly materials used
+    certifications: [String], // environmental certifications
+    packagingImpact: { type: Number, default: 0 }, // kg CO2 from packaging
+    transportImpact: { type: Number, default: 0 }, // kg CO2 from transport
+    productionImpact: { type: Number, default: 0 } // kg CO2 from production
+  },
+  
   createdAt: { type: Date, default: Date.now }
 });
 

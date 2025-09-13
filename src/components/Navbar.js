@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaHeart, FaShoppingCart, FaBars, FaMapMarkerAlt, FaSearch, FaGlobe, FaUserCircle, FaLocationArrow, FaTimes } from "react-icons/fa";
+import { FaHeart, FaShoppingCart, FaBars, FaMapMarkerAlt, FaSearch, FaGlobe, FaUserCircle, FaLocationArrow, FaTimes, FaLeaf } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { auth } from '../firebase';
@@ -154,6 +154,16 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-6">
+          {/* Carbon Tracker with Tooltip */}
+          <div className="relative group">
+            <Link to="/carbon-tracker" className="text-gray-300 hover:text-green-400 transition duration-300 transform hover:scale-110">
+              <FaLeaf className="text-xl" />
+            </Link>
+            <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs bg-gray-700 text-white rounded-md opacity-0 group-hover:opacity-100 transition duration-300">
+              Carbon Tracker
+            </span>
+          </div>
+
           {/* Wishlist with Tooltip */}
           <div className="relative group">
             <Link to="/wish" className="text-gray-300 hover:text-red-500 transition duration-300 transform hover:scale-110">
@@ -261,6 +271,9 @@ const Navbar = () => {
           >
             {showMobileSearch ? <FaTimes className="text-lg" /> : <FaSearch className="text-lg" />}
           </button>
+          <Link to="/carbon-tracker" className="text-gray-300 hover:text-green-400 transition duration-300">
+            <FaLeaf className="text-lg" />
+          </Link>
           <Link to="/wish" className="text-gray-300 hover:text-red-500 transition duration-300">
             <FaHeart className="text-lg" />
           </Link>

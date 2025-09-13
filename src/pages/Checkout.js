@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaLock, FaArrowLeft, FaMapMarkerAlt ,FaCreditCard, FaMoneyBillWave, FaWallet } from "react-icons/fa";
+import { FaLock, FaArrowLeft, FaMapMarkerAlt ,FaCreditCard, FaMoneyBillWave, FaWallet, FaLeaf } from "react-icons/fa";
+import axios from "axios";
 
 const Checkout = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const Checkout = () => {
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [carbonImpact, setCarbonImpact] = useState({ totalEmissions: 0, totalSavings: 0, ecoProducts: 0 });
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -37,6 +39,47 @@ const Checkout = () => {
 
   const calculateTotal = () => {
     return calculateSubtotal() + calculateGST() + 100; 
+  };
+
+  // Calculate carbon footprint of the order
+  const calculateCarbonImpact = () => {
+    let totalEmissions = 0;
+    let totalSavings = 0;
+    let ecoProducts = 0;
+
+    cartItems.forEach(item => {
+      // Simulate carbon calculation based on product categories
+      // In a real app, this data would come from the product API
+      const carbonData = getCarbonDataForProduct(item.name, item.category);
+      const itemEmissions = carbonData.emissions * item.quantity;
+      
+      if (itemEmissions < 0) {
+        totalSavings += Math.abs(itemEmissions);
+        ecoProducts += item.quantity;
+      } else {
+        totalEmissions += itemEmissions;
+      }
+    });
+
+    return { totalEmissions, totalSavings, ecoProducts };
+  };
+
+  // Get carbon data for products (simplified mapping)
+  const getCarbonDataForProduct = (productName, category) => {
+    const name = productName.toLowerCase();
+    
+    // Eco-friendly products (negative emissions = carbon savings)
+    if (name.includes('bamboo') || name.includes('organic') || name.includes('solar') || 
+        name.includes('hemp') || name.includes('cork') || name.includes('recycled')) {
+      return { emissions: -2.5, isEcoFriendly: true };
+    }
+    
+    // Regular products
+    if (name.includes('cotton') || name.includes('bag')) return { emissions: 1.2 };
+    if (name.includes('charger') || name.includes('electronic')) return { emissions: 3.5 };
+    if (name.includes('bottle') || name.includes('container')) return { emissions: 0.8 };
+    
+    return { emissions: 1.0 }; // Default emissions
   };
 
   const handleChange = (e) => {
@@ -62,16 +105,51 @@ const Checkout = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       setIsProcessing(true);
-      // Simulate API call
-      setTimeout(() => {
+      
+      try {
+        // Calculate carbon impact
+        const impact = calculateCarbonImpact();
+        setCarbonImpact(impact);
+
+        // Track carbon impact for each item purchased
+        for (const item of cartItems) {
+          const carbonData = getCarbonDataForProduct(item.name, item.category);
+          
+          try {
+            await axios.post('http://localhost:5000/api/carbon/purchase-impact', {
+              userId: 'default_user_id', // In real app, get from auth context
+              productId: item.productId,
+              productName: item.name,
+              productCategory: item.category?.toLowerCase() || 'general',
+              quantity: item.quantity,
+              isEcoFriendly: carbonData.emissions < 0
+            });
+          } catch (error) {
+            console.log('Carbon tracking unavailable:', error.message);
+            // Continue with checkout even if carbon tracking fails
+          }
+        }
+
+        // Simulate order processing
+        setTimeout(() => {
+          setIsProcessing(false);
+          setOrderSuccess(true);
+          window.scrollTo(0,0);
+        }, 2000);
+        
+      } catch (error) {
+        console.error('Error processing order:', error);
         setIsProcessing(false);
-        setOrderSuccess(true);
-        window.scrollTo(0,0);
-      }, 2000);
+        // Continue with order even if carbon tracking fails
+        setTimeout(() => {
+          setOrderSuccess(true);
+          window.scrollTo(0,0);
+        }, 1000);
+      }
     }
   };
 
@@ -89,6 +167,33 @@ const Checkout = () => {
             <p className="text-sm text-gray-600">Order #: {Math.floor(Math.random() * 1000000)}</p>
             <p className="text-sm text-gray-600">Total: ₹{calculateTotal().toFixed(2)}</p>
           </div>
+
+          {/* Carbon Impact Display */}
+          {(carbonImpact.totalSavings > 0 || carbonImpact.totalEmissions > 0) && (
+            <div className="bg-green-50 p-4 rounded-lg mb-6 text-left border border-green-200">
+              <div className="flex items-center mb-2">
+                <FaLeaf className="text-green-600 mr-2" />
+                <h3 className="font-semibold text-green-800">Environmental Impact</h3>
+              </div>
+              <div className="space-y-1 text-sm">
+                {carbonImpact.totalSavings > 0 && (
+                  <p className="text-green-700">
+                    🌱 Carbon saved: {carbonImpact.totalSavings.toFixed(1)} kg CO₂
+                  </p>
+                )}
+                {carbonImpact.ecoProducts > 0 && (
+                  <p className="text-green-700">
+                    ♻️ Eco-products purchased: {carbonImpact.ecoProducts} items
+                  </p>
+                )}
+                {carbonImpact.totalSavings > carbonImpact.totalEmissions && (
+                  <p className="text-green-600 font-medium mt-2">
+                    Thank you for choosing sustainable products! 🌍
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
           <Link
             to="/shop"
             className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
@@ -352,6 +457,55 @@ const Checkout = () => {
                   <span className="font-bold text-lg">Total</span>
                   <span className="font-bold text-lg text-green-700">₹{calculateTotal().toFixed(2)}</span>
                 </div>
+              </div>
+
+              {/* Carbon Impact Summary */}
+              <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center mb-3">
+                  <FaLeaf className="text-green-600 mr-2" />
+                  <h3 className="font-semibold text-green-800">Environmental Impact</h3>
+                </div>
+                {(() => {
+                  const impact = calculateCarbonImpact();
+                  return (
+                    <div className="space-y-2 text-sm">
+                      {impact.totalSavings > 0 && (
+                        <div className="flex justify-between text-green-700">
+                          <span>Carbon savings from eco-products:</span>
+                          <span className="font-medium">-{impact.totalSavings.toFixed(1)} kg CO₂</span>
+                        </div>
+                      )}
+                      {impact.totalEmissions > 0 && (
+                        <div className="flex justify-between text-gray-700">
+                          <span>Carbon footprint:</span>
+                          <span className="font-medium">+{impact.totalEmissions.toFixed(1)} kg CO₂</span>
+                        </div>
+                      )}
+                      {impact.ecoProducts > 0 && (
+                        <div className="flex justify-between text-green-700">
+                          <span>Eco-friendly products:</span>
+                          <span className="font-medium">{impact.ecoProducts} items</span>
+                        </div>
+                      )}
+                      <div className="pt-2 border-t border-green-200">
+                        <div className="flex justify-between font-medium">
+                          <span>Net Impact:</span>
+                          <span className={impact.totalSavings > impact.totalEmissions ? 'text-green-600' : 'text-gray-600'}>
+                            {impact.totalSavings > impact.totalEmissions 
+                              ? `-${(impact.totalSavings - impact.totalEmissions).toFixed(1)} kg CO₂` 
+                              : `+${(impact.totalEmissions - impact.totalSavings).toFixed(1)} kg CO₂`
+                            }
+                          </span>
+                        </div>
+                        {impact.totalSavings > impact.totalEmissions && (
+                          <p className="text-xs text-green-600 mt-1">
+                            Great! Your eco-friendly choices are making a positive impact! 🌱
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </div>

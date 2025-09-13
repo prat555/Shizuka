@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import { auth } from '../firebase';
+import { CarbonIndicatorDetailed } from "../components/CarbonIndicator";
 
 // Helper to get token
 async function getAuthHeader() {
@@ -240,6 +241,11 @@ const Shop = () => {
                 <FaStar key={i} className={i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"} />
               ))}
               <span className="text-sm text-gray-600 ml-1">{product.rating} ({product.ratingCount})</span>
+            </div>
+
+            {/* Carbon Impact Indicator */}
+            <div className="flex justify-center mt-2">
+              <CarbonIndicatorDetailed productName={product.name} />
             </div>
 
             {/* Buttons */}

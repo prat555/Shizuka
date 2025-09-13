@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { FaTrash, FaShoppingCart, FaStar, FaArrowLeft, FaRegSadTear, FaRegHeart, FaHeart } from "react-icons/fa";
 import { auth } from '../firebase';
+import CarbonIndicator from "../components/CarbonIndicator";
 
 // Helper to get token
 async function getAuthHeader() {
@@ -290,6 +291,12 @@ const Wishlist = () => {
                     {product.rating} ({product.ratingCount})
                   </span>
                 </div>
+                
+                {/* Carbon Impact Indicator */}
+                <div className="flex justify-center mt-2">
+                  <CarbonIndicator productName={product.name} size="sm" />
+                </div>
+                
                 {/* Buttons */}
                 <div className="flex space-x-2 mt-2">
                   {cart[product._id] ? (

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import axios from "axios";
 import "react-multi-carousel/lib/styles.css";
+import { CarbonIndicatorDetailed } from "../components/CarbonIndicator";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://shizuka-backend.onrender.com";
 
@@ -103,6 +104,12 @@ const Home = () => {
                   ))}
                   <span className="text-sm text-gray-600">({product.ratingCount || 0})</span>
                 </div>
+                
+                {/* Carbon Impact Indicator */}
+                <div className="flex justify-center mt-2">
+                  <CarbonIndicatorDetailed productName={product.name} />
+                </div>
+                
                 <button 
                   onClick={() => navigate('/checkout', { 
                     state: { 

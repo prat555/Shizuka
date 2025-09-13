@@ -6,6 +6,7 @@ import Shop from "./pages/Shop";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import CarbonTracker from "./pages/CarbonTracker";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import "tailwindcss/tailwind.css";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/wish" element={<Wishlist />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/carbon-tracker" element={<CarbonTracker />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
