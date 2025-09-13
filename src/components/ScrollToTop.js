@@ -27,7 +27,22 @@ const ScrollToTop = () => {
   };
 
   return (
-    <button
+    <>
+      <style>
+        {`
+          @keyframes gentlePulse {
+            0%, 100% {
+              opacity: 0.7;
+              transform: translateY(2px) scale(1);
+            }
+            50% {
+              opacity: 1;
+              transform: translateY(2px) scale(1.05);
+            }
+          }
+        `}
+      </style>
+      <button
       onClick={scrollToTop}
       className={`fixed bottom-4 right-8 w-10 h-10 flex items-center justify-center bg-gray-700 border border-gray-600 rounded-full shadow-md text-gray-300 hover:bg-gray-600 transition duration-300 transform ${
         isVisible ? "opacity-100" : "opacity-0"
@@ -36,11 +51,15 @@ const ScrollToTop = () => {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"  
+        className="h-4 w-4"  
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
-        strokeWidth="2"
+        strokeWidth="2.5"
+        style={{ 
+          animation: 'gentlePulse 3s ease-in-out infinite',
+          transform: 'translateY(2px)'
+        }}
       >
         <path
           strokeLinecap="round"
@@ -49,6 +68,7 @@ const ScrollToTop = () => {
         />
       </svg>
     </button>
+    </>
   );
 };
 
