@@ -1,10 +1,10 @@
-# 🌱 Shizuka – Sustainable E‑Commerce Platform
+# Shizuka – Sustainable E‑Commerce Platform
 
 Shizuka is a full‑stack e‑commerce app for eco‑friendly products. It offers a clean, fast shopping experience, user‑scoped cart and wishlist, and a Carbon Footprint Tracker to encourage sustainable choices.
 
 ![Shizuka Platform](https://img.shields.io/badge/Platform-E--Commerce-green) ![React](https://img.shields.io/badge/React-19-blue) ![Express](https://img.shields.io/badge/Backend-Express-lightgreen) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-darkgreen) ![Tailwind](https://img.shields.io/badge/Styling-Tailwind%20CSS-cyan)
 
-## ✨ Key features
+## Key features
 
 - Product browsing with categories, search, featured carousels
 - User‑scoped Wishlist and Cart (persisted via backend)
@@ -58,7 +58,7 @@ Backend (`backend/`):
 - `npm start` – start Express server
 - `npm run dev` – start with nodemon (if you have it installed)
 
-## 🌐 API overview
+## API overview
 
 Base URL (dev): `http://localhost:5000`
 
