@@ -4,42 +4,6 @@
 
 ![Shizuka Platform](https://img.shields.io/badge/Platform-E--Commerce-green) ![React](https://img.shields.io/badge/React-18+-blue) ![Node.js](https://img.shields.io/badge/Node.js-Express-lightgreen) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-darkgreen) ![Tailwind](https://img.shields.io/badge/Styling-Tailwind%20CSS-cyan)
 
-## ✨ Key Features
-
-### 🔐 **Authentication & User Management**
-- **Multi-Authentication**: Email/password and Google OAuth integration
-- **Secure Sessions**: JWT-based authentication with Firebase
-- **User Profiles**: Customizable profiles with display names
-- **Account Security**: Password reset and account management features
-
-### 🛍️ **Enhanced Shopping Experience**
-- **Smart Product Discovery**: Advanced search with category filtering
-- **Interactive Product Cards**: Hover effects and detailed product views
-- **Dynamic Cart Management**: Real-time quantity updates and calculations
-- **Wishlist System**: Save and manage favorite products
-- **Streamlined Checkout**: Multi-step checkout with order confirmation
-- **Responsive Design**: Seamless experience across all devices
-
-### 🎨 **Modern UI/UX Design**
-- **Framer Motion Animations**: Smooth page transitions and micro-interactions
-- **Dark Theme Navigation**: Sleek, modern navbar with location detection
-- **Carousel Components**: Beautiful product showcases on home page
-- **Interactive Elements**: Hover effects, loading states, and visual feedback
-- **Mobile-First Approach**: Optimized for mobile devices with touch-friendly interactions
-
-### 🌍 **Sustainability Focus**
-- **Eco-Friendly Product Catalog**: Curated selection of sustainable products
-- **Green Branding**: Environmentally conscious design and messaging
-- **Sustainable Shopping**: Promoting eco-friendly consumer choices
-- **Educational Content**: Information about sustainable living
-
-### 🔧 **Technical Excellence**
-- **Real-time Updates**: Live cart and wishlist synchronization
-- **Error Handling**: Comprehensive error management and user feedback
-- **Performance Optimized**: Fast loading times and efficient code
-- **SEO Friendly**: Optimized for search engines
-- **Cross-browser Compatibility**: Works seamlessly across modern browsers
-
 ## 🛠️ Technologies Used
 
 ### 🎨 **Frontend Technologies**
